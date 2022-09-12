@@ -6,6 +6,7 @@ import { Professional } from "./components/Professional";
 class App extends React.Component {
   constructor() {
     super();
+
     this.state = {
       education: {
         schoolName: '',
@@ -28,7 +29,8 @@ class App extends React.Component {
           }
         ]
       }
-    }
+    };
+
   }
 
   render() {
@@ -38,6 +40,9 @@ class App extends React.Component {
           name="Will"
           email="pabs@gmail.com"
           phoneNo="646-232-9560"
+          handleChange={this.handleChange}
+          handleEdit={this.handleEdit}
+          handleSubmit={this.handleSubmit}
         />
         <Professional
           companyName="Tesla"
