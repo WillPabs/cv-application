@@ -33,6 +33,7 @@ export class GeneralInfo extends React.Component {
 
     render() {
         const { name, email, phoneNo, isEditing } = this.state;
+
         if (isEditing) {
             return(
                 <form onSubmit={this.handleSubmit}>
