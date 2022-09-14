@@ -1,4 +1,5 @@
 import React from "react";
+import uniqid from "uniqid";
 import { Education } from "./components/Education";
 import { GeneralInfo } from "./components/GeneralInfo";
 import { Professional } from "./components/Professional";
@@ -9,6 +10,15 @@ class App extends React.Component {
 
     this.state = {
       professional: [],
+      proExperience: {
+        id: uniqid(),
+        companyName: '',
+        positionTitle: '',
+        tasks: '',
+        dateStarted: '',
+        dateEnded: '',
+        isEditing: true,
+      },
       educational: [],
     };
 
@@ -20,14 +30,15 @@ class App extends React.Component {
     const value = e.target.value;
   };
 
-  addExperience = () => {
+  addExperience = (e) => {
+    console.log(e)
     this.setState({
-      professional: [...this.state.professional, <Professional/>]
-    })
-  }
+        professional: [...this.state.professional, this.state.proExperience]
+    });
+};
 
   render() {
-    // const professional = 
+    const { professional } = this.state;
 
     return (
       <div className="App">
@@ -36,16 +47,16 @@ class App extends React.Component {
           email="pabs@gmail.com"
           phoneNo="646-232-9560"
         />
-        {this.state.professional}
-        <Professional
+        {/* <Professional
           // experiences={this.state.professional}
           // companyName="Tesla"
           // positionTitle="Software Engineer"
           // tasks="Created website"
           // dateStarted="09/24/21"
           // dateEnded=""
-        />
-        <button onClick={this.addExperience}>Add Experience</button>
+        /> */}
+        <Professional experiences={this.state.professional} addExperience={this.addExperience}/>
+        
         <Education
           schoolName="SJU"
           major="CS"
