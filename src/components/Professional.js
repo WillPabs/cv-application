@@ -48,9 +48,10 @@ export class Professional extends React.Component {
 
     render() {
         const { id, companyName, positionTitle, tasks, dateStarted, dateEnded, isEditing } = this.state;
+        const { deleteExperience } = this.props;
         if (isEditing) {
             return(
-                <form key={id} id={id} onSubmit={this.handleSubmit}>
+                <form key={id} id={id} onSubmit={deleteExperience}>
                     <input 
                         type="text"
                         id="companyName"
@@ -86,7 +87,8 @@ export class Professional extends React.Component {
                         onChange={this.handleChange}
                         value={dateEnded}
                     />
-                    <button>Submit</button>
+                    <button type="button" onClick={this.handleSubmit}>Submit</button>
+                    <button type="submit">Delete Experience</button>
                 </form>
             );
         } else {

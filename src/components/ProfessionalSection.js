@@ -36,8 +36,15 @@ export class ProfessionalSection extends React.Component {
         });
     };
 
+    deleteExperience = (e) => {
+        e.preventDefault();
+        const id = e.target.id;
+        this.setState({
+            experiences: this.state.experiences.filter(experience => experience.id !== id)
+        });
+    };
+
     render() {
-        console.log(this.props)
         const { experiences } = this.state;
         const heading = <div>Professional Experience</div>;
         return(
@@ -54,6 +61,7 @@ export class ProfessionalSection extends React.Component {
                             dateStarted={experience.dateStarted}
                             dateEnded={experience.dateEnded}
                             isEditing={experience.isEditing}
+                            deleteExperience={this.deleteExperience}
                         />
                     )
                 }) : 
@@ -68,6 +76,7 @@ export class ProfessionalSection extends React.Component {
                     /> 
                 }
                 <button onClick={this.addExperience}>Add Experience</button>
+                
             </ul>
         )
     }
