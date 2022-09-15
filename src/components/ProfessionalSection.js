@@ -20,8 +20,7 @@ export class ProfessionalSection extends React.Component {
         }
     };
 
-    addExperience = (e) => {
-        console.log(e)
+    addExperience = () => {
         this.setState({
             experiences: [...this.state.experiences, this.state.experience],
             experience: {
@@ -76,7 +75,6 @@ export class ProfessionalSection extends React.Component {
                     /> 
                 }
                 <button onClick={this.addExperience}>Add Experience</button>
-                
             </ul>
         )
     }

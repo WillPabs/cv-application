@@ -1,5 +1,6 @@
 import React from "react";
 import { Education } from "./components/Education";
+import { EducationSection } from "./components/EducationSection";
 import { GeneralInfo } from "./components/GeneralInfo";
 import { Professional } from "./components/Professional";
 import { ProfessionalSection } from "./components/ProfessionalSection";
@@ -32,21 +33,8 @@ class App extends React.Component {
           email="pabs@gmail.com"
           phoneNo="646-232-9560"
         />
-        {/* <Professional
-          // experiences={this.state.professional}
-          // companyName="Tesla"
-          // positionTitle="Software Engineer"
-          // tasks="Created website"
-          // dateStarted="09/24/21"
-          // dateEnded=""
-        /> */}
         <ProfessionalSection/>
-        
-        <Education
-          schoolName="SJU"
-          major="CS"
-          dateOfStudy="2019"
-        />
+        <EducationSection/>
       </div>
     );
   };
