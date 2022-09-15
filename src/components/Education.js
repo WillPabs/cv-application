@@ -5,10 +5,11 @@ export class Education extends React.Component {
         super(props);
 
         this.state = {
+            id: this.props.id,
             schoolName: this.props.schoolName,
             major: this.props.major,
             dateOfStudy: this.props.dateOfStudy,
-            isEditing: false
+            isEditing: this.props.isEditing
         }
     };
 
@@ -32,12 +33,10 @@ export class Education extends React.Component {
     }
 
     render() {
-        const { schoolName, major, dateOfStudy, isEditing } = this.state;
-        const heading = <div>Educational Experience</div>;
+        const { id, schoolName, major, dateOfStudy, isEditing } = this.state;
         if (isEditing) {
             return (
-                <form onSubmit={this.handleSubmit}>
-                    {heading}
+                <form id={id} onSubmit={this.props.deleteExperience}>
                     <input
                         type="text"
                         id="schoolName"
@@ -59,13 +58,13 @@ export class Education extends React.Component {
                         value={dateOfStudy}
                         onChange={this.handleChange}
                     />
-                    <button>Resubmit</button>
+                    <button onClick={this.handleSubmit}>Resubmit</button>
+                    <button type="submit">Delete Experience</button>
                 </form>
             );
         } else {
             return (
                 <div>
-                    {heading}
                     <div>{schoolName}</div>
                     <div>{major}</div>
                     <div>{dateOfStudy}</div>
