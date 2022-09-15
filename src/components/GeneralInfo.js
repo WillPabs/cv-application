@@ -66,7 +66,7 @@ export class GeneralInfo extends React.Component {
         } else {
             return(
                 <div>
-                    <div>{name}</div>
+                    <div className="text-3xl text-gray-700 font-bold mb-5">{name}</div>
                     <div id="email">{email}</div>
                     <div id="phoneNo">{phoneNo}</div>
                     <button onClick={this.handleEdit}>Edit</button>

@@ -52,7 +52,7 @@ export class Professional extends React.Component {
         if (isEditing) {
             return(
                 <form id={id} onSubmit={deleteExperience}>
-                    <input 
+                    <input
                         type="text"
                         id="companyName"
                         placeholder="Company Name"
