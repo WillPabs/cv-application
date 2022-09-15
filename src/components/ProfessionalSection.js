@@ -49,6 +49,7 @@ export class ProfessionalSection extends React.Component {
         return(
             <ul>
                 {heading}
+                <button onClick={this.addExperience}>Add Experience</button>
                 {experiences ? experiences.map((experience) => {
                     return (
                         <Professional
@@ -74,7 +75,6 @@ export class ProfessionalSection extends React.Component {
                         isEditing={this.state.experience.isEditing}
                     /> 
                 }
-                <button onClick={this.addExperience}>Add Experience</button>
             </ul>
         )
     }

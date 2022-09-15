@@ -51,7 +51,7 @@ export class Professional extends React.Component {
         const { deleteExperience } = this.props;
         if (isEditing) {
             return(
-                <form key={id} id={id} onSubmit={deleteExperience}>
+                <form id={id} onSubmit={deleteExperience}>
                     <input 
                         type="text"
                         id="companyName"
