@@ -58,8 +58,8 @@ export class Education extends React.Component {
                         value={dateOfStudy}
                         onChange={this.handleChange}
                     />
-                    <button onClick={this.handleSubmit}>Resubmit</button>
-                    <button type="submit">Delete Experience</button>
+                    <button className="button-edit" onClick={this.handleSubmit}>Resubmit</button>
+                    <button className="button-delete" type="submit">Delete Experience</button>
                 </form>
             );
         } else {
@@ -68,7 +68,7 @@ export class Education extends React.Component {
                     <div>{schoolName}</div>
                     <div>{major}</div>
                     <div>{dateOfStudy}</div>
-                    <button onClick={this.handleEdit}>Edit</button>
+                    <button className="button-edit" onClick={this.handleEdit}>Edit</button>
                 </div>
             );
         }

@@ -36,7 +36,10 @@ export class GeneralInfo extends React.Component {
 
         if (isEditing) {
             return(
-                <form onSubmit={this.handleSubmit}>
+                <form 
+                    className="flex space-x-1 align-center"
+                    onSubmit={this.handleSubmit}
+                >
                     <input 
                         type="text"
                         id="name"
@@ -58,7 +61,7 @@ export class GeneralInfo extends React.Component {
                         onChange={this.handleChange}
                         value={phoneNo}
                     />
-                    <button>
+                    <button className="button-edit">
                         Resubmit
                     </button>
                 </form>
@@ -69,7 +72,7 @@ export class GeneralInfo extends React.Component {
                     <div>{name}</div>
                     <div id="email">{email}</div>
                     <div id="phoneNo">{phoneNo}</div>
-                    <button onClick={this.handleEdit}>Edit</button>
+                    <button className="button-edit" onClick={this.handleEdit}>Edit</button>
                 </div>
             );
         }

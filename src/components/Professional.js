@@ -87,8 +87,8 @@ export class Professional extends React.Component {
                         onChange={this.handleChange}
                         value={dateEnded}
                     />
-                    <button type="button" onClick={this.handleSubmit}>Submit</button>
-                    <button type="submit">Delete Experience</button>
+                    <button className="button-edit" type="button" onClick={this.handleSubmit}>Submit</button>
+                    <button className="button-delete" type="submit">Delete Experience</button>
                 </form>
             );
         } else {
@@ -99,7 +99,7 @@ export class Professional extends React.Component {
                     <div>{tasks}</div>
                     <div>{dateStarted}</div>
                     <div>{dateEnded}</div>
-                    <button onClick={this.handleEdit}>Edit</button>
+                    <button className="button-edit" onClick={this.handleEdit}>Edit</button>
                 </div>
             );
         }

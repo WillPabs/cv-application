@@ -49,7 +49,12 @@ export class ProfessionalSection extends React.Component {
         return(
             <ul>
                 {heading}
-                <button onClick={this.addExperience}>Add Experience</button>
+                <button 
+                    className="button-add"
+                    onClick={this.addExperience}
+                >
+                    Add Experience
+                </button>
                 {experiences ? experiences.map((experience) => {
                     return (
                         <Professional
