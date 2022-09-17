@@ -41,7 +41,7 @@ export class EducationSection extends React.Component {
 
 
     render() {
-        const heading = <div>Educational Experience</div>;
+        const heading = <div className="section-heading">Educational Experience</div>;
         const { id, schoolName, major, dateOfStudy, isEditing } = this.state.experience;
         const { experiences } = this.state;
         return (

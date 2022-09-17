@@ -45,7 +45,7 @@ export class ProfessionalSection extends React.Component {
 
     render() {
         const { experiences } = this.state;
-        const heading = <div>Professional Experience</div>;
+        const heading = <div className="section-heading">Professional Experience</div>;
         return(
             <ul>
                 {heading}
