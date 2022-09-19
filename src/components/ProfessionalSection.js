@@ -41,6 +41,7 @@ export class ProfessionalSection extends React.Component {
         this.setState({
             experiences: this.state.experiences.filter(experience => experience.id !== id)
         });
+        return false;
     };
 
     render() {
