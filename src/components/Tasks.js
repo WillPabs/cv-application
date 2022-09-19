@@ -1,5 +1,6 @@
 import React from "react";
 import uniqid from "uniqid";
+import { Task } from "./Task";
 
 export class Tasks extends React.Component {
     constructor(props) {
@@ -15,9 +16,15 @@ export class Tasks extends React.Component {
     }
 
     render() {
-        const 
+        const { tasks } = this.state;
         return (
-
+            <ul>
+                {tasks.map((task) => {
+                    return (
+                        <Task text={task.text}/>
+                    )
+                })}
+            </ul>
         )
     }
 }
