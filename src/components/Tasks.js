@@ -7,24 +7,47 @@ export class Tasks extends React.Component {
         super(props)
 
         this.state = {
-            tasks: [],
+            tasks: this.props.tasks,
             task: {
                 id: uniqid(),
-                text: ''
+                text: '',
+                isEditing: this.props.isEditing
             }
         }
     }
 
+    addTask = () => {
+        this.setState({
+            tasks: [...this.state.tasks, this.state.task]   
+        })
+    }
+
     render() {
         const { tasks } = this.state;
-        return (
-            <ul>
-                {tasks.map((task) => {
-                    return (
-                        <Task text={task.text}/>
-                    )
-                })}
-            </ul>
-        )
+        if (tasks.length > 0) {
+            return (
+                <ul>
+                    <div>Tasks</div>
+                    <button className="button-add" onClick={this.addTask}>Add Task</button>
+                    {tasks.map((task) => {
+                        return (
+                            <Task 
+                                key={task.id} 
+                                text={task.text}
+                                isEditing={task.isEditing}    
+                            />
+                        )
+                    })}
+                </ul>
+            )
+        } else {
+            return(
+                <div>
+                    <div>Tasks</div>
+                    <button className="button-add" onClick={this.addTask}>Add Task</button>
+                </div>
+            )
+        }
+
     }
 }

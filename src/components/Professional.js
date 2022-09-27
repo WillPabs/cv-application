@@ -1,4 +1,5 @@
 import React from "react";
+import { Tasks } from "./Tasks";
 
 export class Professional extends React.Component {
     constructor(props) {
@@ -68,13 +69,6 @@ export class Professional extends React.Component {
                     />
                     <input 
                         type="text"
-                        id="tasks"
-                        placeholder="Tasks"
-                        onChange={this.handleChange}
-                        value={tasks}
-                    />
-                    <input 
-                        type="text"
                         id="dateStarted"
                         placeholder="Date Started"
                         onChange={this.handleChange}
@@ -87,6 +81,14 @@ export class Professional extends React.Component {
                         onChange={this.handleChange}
                         value={dateEnded}
                     />
+                    <input
+                        type="text"
+                        id="tasks"
+                        placeholder="Tasks"
+                        onChange={this.handleChange}
+                        value={tasks}
+                    />
+                    <Tasks tasks={tasks} isEditing={isEditing} onChange={this.handleChange}/>
                     <button className="button-edit" type="button" onClick={this.handleSubmit}>Submit</button>
                     <button className="button-delete" type="submit">Delete Experience</button>
                 </form>
@@ -96,9 +98,9 @@ export class Professional extends React.Component {
                 <div key={id} id={id}>
                     <div>{companyName}</div>
                     <div>{positionTitle}</div>
-                    <div>{tasks}</div>
                     <div>{dateStarted}</div>
                     <div>{dateEnded}</div>
+                    <div>{tasks}</div>
                     <button className="button-edit" onClick={this.handleEdit}>Edit</button>
                 </div>
             );
