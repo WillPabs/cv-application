@@ -9,7 +9,7 @@ export class Professional extends React.Component {
             id: this.props.id,
             companyName: this.props.companyName,
             positionTitle: this.props.positionTitle,
-            tasks: <Tasks/>,
+            // tasks: <Tasks/>,
             dateStarted: this.props.dateStarted,
             dateEnded: this.props.dateEnded,
             isEditing: this.props.isEditing,
@@ -90,7 +90,7 @@ export class Professional extends React.Component {
                         value={tasks}
                     /> */}
                     {/* <Tasks isEditing={isEditing} onChange={this.handleChange}/> */}
-                    {tasks}
+                    <Tasks isEditing ={isEditing}/>
                     <button className="button-edit" type="button" onClick={this.handleSubmit}>Submit</button>
                     <button className="button-delete" type="submit">Delete Experience</button>
                 </form>

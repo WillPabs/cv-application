@@ -27,28 +27,33 @@ export class Task extends React.Component {
         this.setState({
             id: this.state.id,
             text: this.state.text,
-            isEditing: false,
+            isEditing: this.props.isEditing,
         })
     }
 
     render() {
-        const { text, isEditing } = this.state
+        const { id, text, isEditing } = this.state
         if (isEditing) {
             return (
-                <textarea 
-                    id="text"
-                    rows="5" 
-                    cols="50"
-                    placeholder="Enter Task"
-                    value={text}
-                    onChange={this.handleChange}
-                />
+                <div id={`${id}`}>
+                    <textarea 
+                        id="text"
+                        rows="5" 
+                        cols="50"
+                        placeholder="Enter Task"
+                        value={text}
+                        onChange={this.handleChange}
+                    />
+                    <button className="button-edit" type="button" onClick={this.handleSubmit}>Submit</button>
+                    <button className="button-delete" type="button" onClick={this.props.deleteTask.bind(this)}>Delete Task</button>
+                </div>
             )
         } else {
             return (
-                <li>
-                    NOT EDITING
+                <li id={id}>
                     {text}
+                    <button className="button-edit" type="button" onClick={this.handleSubmit}>Edit</button>
+                    <button className="button-delete" type="submit" onClick={this.props.deleteTask}>Delete Task</button>
                 </li>
             )
         }

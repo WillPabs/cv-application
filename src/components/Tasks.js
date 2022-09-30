@@ -22,43 +22,50 @@ export class Tasks extends React.Component {
             task: {
                 id: uniqid(),
                 text: '',
-                isEditing: true
+                isEditing: this.props.isEditing
             }   
         })
     }
 
-    deleteExperience = (e) => {
-        e.preventDefault();
-        const id = e.target.id;
+    deleteTask = (e) => {
+        const id = e.target.parentElement.id;
         this.setState({
             tasks: this.state.tasks.filter(task => task.id !== id)
         });
-        return false;
     };
 
     render() {
         const { tasks } = this.state;
+        console.log(tasks)
         if (tasks.length > 0) {
             return (
-                <ul>
-                    <div>Tasks</div>
+                <div>
+                    <div>Your Tasks</div>
                     <button className="button-add" onClick={this.addTask}>Add Task</button>
                     {tasks.map((task) => {
                         return (
-                            <Task 
+                            <Task
+                                id={task.id} 
                                 key={task.id} 
                                 text={task.text}
                                 isEditing={task.isEditing}
-                                deleteExperience={this.deleteExperience}    
+                                deleteTask={this.deleteTask}    
                             />
                         )
                     })}
-                </ul>
+                </div>
             )
         } else {
             return(
                 <div>
                     <div>No Tasks</div>
+                    {/* <Task 
+                        id={this.state.task.id}
+                        key={this.state.task.id} 
+                        text={this.state.task.text}
+                        isEditing={this.state.task.isEditing}
+                        deleteTask={this.deleteTask}    
+                    /> */}
                     <button className="button-add" onClick={this.addTask}>Add Task</button>
                 </div>
             )
