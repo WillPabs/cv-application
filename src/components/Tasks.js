@@ -7,7 +7,7 @@ export class Tasks extends React.Component {
         super(props)
 
         this.state = {
-            tasks: this.props.tasks,
+            tasks: [],
             task: {
                 id: uniqid(),
                 text: '',
@@ -18,9 +18,23 @@ export class Tasks extends React.Component {
 
     addTask = () => {
         this.setState({
-            tasks: [...this.state.tasks, this.state.task]   
+            tasks: [...this.state.tasks, this.state.task],
+            task: {
+                id: uniqid(),
+                text: '',
+                isEditing: true
+            }   
         })
     }
+
+    deleteExperience = (e) => {
+        e.preventDefault();
+        const id = e.target.id;
+        this.setState({
+            tasks: this.state.tasks.filter(task => task.id !== id)
+        });
+        return false;
+    };
 
     render() {
         const { tasks } = this.state;
@@ -34,7 +48,8 @@ export class Tasks extends React.Component {
                             <Task 
                                 key={task.id} 
                                 text={task.text}
-                                isEditing={task.isEditing}    
+                                isEditing={task.isEditing}
+                                deleteExperience={this.deleteExperience}    
                             />
                         )
                     })}
@@ -43,7 +58,7 @@ export class Tasks extends React.Component {
         } else {
             return(
                 <div>
-                    <div>Tasks</div>
+                    <div>No Tasks</div>
                     <button className="button-add" onClick={this.addTask}>Add Task</button>
                 </div>
             )

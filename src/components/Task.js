@@ -35,20 +35,19 @@ export class Task extends React.Component {
         const { text, isEditing } = this.state
         if (isEditing) {
             return (
-                <form onSubmit={this.handleSubmit}>
-                    <textarea 
-                        id="text"
-                        rows="5" 
-                        cols="50"
-                        placeholder="Enter Task"
-                        value={text}
-                        onChange={this.handleChange}
-                    />
-                </form>
+                <textarea 
+                    id="text"
+                    rows="5" 
+                    cols="50"
+                    placeholder="Enter Task"
+                    value={text}
+                    onChange={this.handleChange}
+                />
             )
         } else {
             return (
                 <li>
+                    NOT EDITING
                     {text}
                 </li>
             )
