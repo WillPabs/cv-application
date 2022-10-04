@@ -9,7 +9,7 @@ export class Professional extends React.Component {
             id: this.props.id,
             companyName: this.props.companyName,
             positionTitle: this.props.positionTitle,
-            // tasks: <Tasks/>,
+            tasks: this.props.tasks,
             dateStarted: this.props.dateStarted,
             dateEnded: this.props.dateEnded,
             isEditing: this.props.isEditing,
@@ -23,6 +23,12 @@ export class Professional extends React.Component {
         console.log(value)
         this.setState({
             [property]: value
+        })
+    }
+
+    handleTaskChange = (text) => {
+        this.setState({
+            tasks: text
         })
     }
 
@@ -40,7 +46,7 @@ export class Professional extends React.Component {
             id: this.state.id,
             companyName: this.state.companyName,
             positionTitle: this.state.positionTitle,
-            // tasks: this.state.tasks,
+            tasks: this.state.tasks,
             dateStarted: this.state.dateStarted,
             dateEnded: this.state.dateEnded,
             isEditing: false,
@@ -50,7 +56,7 @@ export class Professional extends React.Component {
     render() {
         const { id, companyName, positionTitle, dateStarted, dateEnded, isEditing } = this.state;
         const { deleteExperience } = this.props;
-        const tasks = <Tasks isEditing={isEditing} onChange={this.handleChange}/>;
+        const tasks = <Tasks tasks={this.state.tasks} isEditing={isEditing} onTaskChange={this.handleTaskChange}/>;
         if (isEditing) {
             return(
                 <form id={id} onSubmit={deleteExperience}>
@@ -82,15 +88,7 @@ export class Professional extends React.Component {
                         onChange={this.handleChange}
                         value={dateEnded}
                     />
-                    {/* <input
-                        type="text"
-                        id="tasks"
-                        placeholder="Tasks"
-                        onChange={this.handleChange}
-                        value={tasks}
-                    /> */}
-                    {/* <Tasks isEditing={isEditing} onChange={this.handleChange}/> */}
-                    <Tasks isEditing ={isEditing}/>
+                    {tasks}
                     <button className="button-edit" type="button" onClick={this.handleSubmit}>Submit</button>
                     <button className="button-delete" type="submit">Delete Experience</button>
                 </form>
@@ -102,8 +100,6 @@ export class Professional extends React.Component {
                     <div>{positionTitle}</div>
                     <div>{dateStarted}</div>
                     <div>{dateEnded}</div>
-                    {/* <div>{tasks}</div> */}
-                    {/* <Tasks isEditing={isEditing} onChange={this.handleChange}/> */}
                     {tasks}
                     <button className="button-edit" onClick={this.handleEdit}>Edit</button>
                 </div>

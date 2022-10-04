@@ -5,24 +5,27 @@ import { Task } from "./Task";
 export class Tasks extends React.Component {
     constructor(props) {
         super(props)
+        this.addTask = this.addTask.bind(this);
+        this.onTaskChange = this.props.onTaskChange.bind(this);
 
         this.state = {
-            tasks: [],
+            tasks: this.props.tasks,
             task: {
                 id: uniqid(),
                 text: '',
-                isEditing: this.props.isEditing
+                isEditing: true
             }
         }
     }
 
-    addTask = () => {
+    addTask = (e) => {
+        e.preventDefault();
         this.setState({
             tasks: [...this.state.tasks, this.state.task],
             task: {
                 id: uniqid(),
                 text: '',
-                isEditing: this.props.isEditing
+                isEditing: true
             }   
         })
     }
@@ -49,6 +52,7 @@ export class Tasks extends React.Component {
                                 key={task.id} 
                                 text={task.text}
                                 isEditing={task.isEditing}
+                                onTaskChange={this.onTaskChange}
                                 deleteTask={this.deleteTask}    
                             />
                         )
@@ -59,13 +63,6 @@ export class Tasks extends React.Component {
             return(
                 <div>
                     <div>No Tasks</div>
-                    {/* <Task 
-                        id={this.state.task.id}
-                        key={this.state.task.id} 
-                        text={this.state.task.text}
-                        isEditing={this.state.task.isEditing}
-                        deleteTask={this.deleteTask}    
-                    /> */}
                     <button className="button-add" onClick={this.addTask}>Add Task</button>
                 </div>
             )

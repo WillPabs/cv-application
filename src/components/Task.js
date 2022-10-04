@@ -12,12 +12,20 @@ export class Task extends React.Component {
     }
 
     handleChange = (e) => {
-        const property = e.target.id;
-        const value = e.target.value;
-        console.log(property)
-        console.log(value)
+        this.props.onTaskChange(e.target.value)
+        // const property = e.target.id;
+        // const value = e.target.value;
+        // console.log(property)
+        // console.log(value)
+        // this.setState({
+        //     [property]: value
+        // })
+    }
+
+    editTask = (e) => {
+        e.preventDefault();
         this.setState({
-            [property]: value
+            isEditing: true
         })
     }
 
@@ -27,7 +35,7 @@ export class Task extends React.Component {
         this.setState({
             id: this.state.id,
             text: this.state.text,
-            isEditing: this.props.isEditing,
+            isEditing: false,
         })
     }
 
@@ -41,7 +49,7 @@ export class Task extends React.Component {
                         rows="5" 
                         cols="50"
                         placeholder="Enter Task"
-                        value={text}
+                        value={this.props.text}
                         onChange={this.handleChange}
                     />
                     <button className="button-edit" type="button" onClick={this.handleSubmit}>Submit</button>
@@ -52,7 +60,7 @@ export class Task extends React.Component {
             return (
                 <li id={id}>
                     {text}
-                    <button className="button-edit" type="button" onClick={this.handleSubmit}>Edit</button>
+                    <button className="button-edit" type="button" onClick={this.editTask}>Edit</button>
                     <button className="button-delete" type="submit" onClick={this.props.deleteTask}>Delete Task</button>
                 </li>
             )
