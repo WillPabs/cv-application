@@ -12,14 +12,15 @@ export class Task extends React.Component {
     }
 
     handleChange = (e) => {
-        this.props.onTaskChange(e.target.value)
-        // const property = e.target.id;
-        // const value = e.target.value;
+        const property = e.target.id;
+        const value = e.target.value;
+        this.setState({
+            [property]: value
+        })
+
+        this.props.onTaskChange(value)
         // console.log(property)
         // console.log(value)
-        // this.setState({
-        //     [property]: value
-        // })
     }
 
     editTask = (e) => {
@@ -49,7 +50,7 @@ export class Task extends React.Component {
                         rows="5" 
                         cols="50"
                         placeholder="Enter Task"
-                        value={this.props.text}
+                        value={text}
                         onChange={this.handleChange}
                     />
                     <button className="button-edit" type="button" onClick={this.handleSubmit}>Submit</button>

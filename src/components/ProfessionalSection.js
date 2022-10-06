@@ -12,16 +12,11 @@ export class ProfessionalSection extends React.Component {
                 id: uniqid(),
                 companyName: '',
                 positionTitle: '',
-                tasks: [],
                 dateStarted: '',
                 dateEnded: '',
                 isEditing: true,
+                tasks: []
             },
-            task: {
-                id: uniqid(),
-                text: '',
-                isEditing: true
-            }
         }
     };
 
@@ -83,6 +78,7 @@ export class ProfessionalSection extends React.Component {
                         tasks={this.state.experience.tasks}
                         dateStarted={this.state.experience.dateStarted}
                         dateEnded={this.state.experience.dateEnded}
+                        // onAddTask={this.addTask}
                         isEditing={this.state.experience.isEditing}
                     /> 
                 }

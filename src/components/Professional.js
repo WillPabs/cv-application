@@ -1,4 +1,5 @@
 import React from "react";
+import uniqid from "uniqid";
 import { Tasks } from "./Tasks";
 
 export class Professional extends React.Component {
@@ -13,8 +14,25 @@ export class Professional extends React.Component {
             dateStarted: this.props.dateStarted,
             dateEnded: this.props.dateEnded,
             isEditing: this.props.isEditing,
+            task: {
+                id: uniqid(),
+                text: '',
+                isEditing: true
+            }
         }
     };
+
+    addTask = (e) => {
+        e.preventDefault();
+        this.setState({
+            tasks: [...this.state.tasks, this.state.task],
+            task: {
+                id: uniqid(),
+                text: '',
+                isEditing: true
+            }   
+        })
+    }
 
     handleChange = (e) => {
         const property = e.target.id;
@@ -28,7 +46,7 @@ export class Professional extends React.Component {
 
     handleTaskChange = (text) => {
         this.setState({
-            tasks: text
+            task: text
         })
     }
 
@@ -56,7 +74,7 @@ export class Professional extends React.Component {
     render() {
         const { id, companyName, positionTitle, dateStarted, dateEnded, isEditing } = this.state;
         const { deleteExperience } = this.props;
-        const tasks = <Tasks tasks={this.state.tasks} isEditing={isEditing} onTaskChange={this.handleTaskChange}/>;
+        const tasks = <Tasks tasks={this.state.tasks} onAddTask={this.addTask} isEditing={isEditing} onTaskChange={this.handleTaskChange}/>;
         if (isEditing) {
             return(
                 <form id={id} onSubmit={deleteExperience}>

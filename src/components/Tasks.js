@@ -5,8 +5,7 @@ import { Task } from "./Task";
 export class Tasks extends React.Component {
     constructor(props) {
         super(props)
-        this.addTask = this.addTask.bind(this);
-        this.onTaskChange = this.props.onTaskChange.bind(this);
+        // this.onTaskChange = this.props.onTaskChange.bind(this);
 
         this.state = {
             tasks: this.props.tasks,
@@ -20,6 +19,7 @@ export class Tasks extends React.Component {
 
     addTask = (e) => {
         e.preventDefault();
+        console.log(e.target.elements)
         this.setState({
             tasks: [...this.state.tasks, this.state.task],
             task: {
@@ -44,7 +44,7 @@ export class Tasks extends React.Component {
             return (
                 <div>
                     <div>Your Tasks</div>
-                    <button className="button-add" onClick={this.addTask}>Add Task</button>
+                    <button className="button-add" onClick={this.props.addTask}>Add Task</button>
                     {tasks.map((task) => {
                         return (
                             <Task
@@ -52,7 +52,7 @@ export class Tasks extends React.Component {
                                 key={task.id} 
                                 text={task.text}
                                 isEditing={task.isEditing}
-                                onTaskChange={this.onTaskChange}
+                                onTaskChange={this.props.onTaskChange}
                                 deleteTask={this.deleteTask}    
                             />
                         )
