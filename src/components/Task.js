@@ -18,7 +18,7 @@ export class Task extends React.Component {
             [property]: value
         })
 
-        this.props.onTaskChange(value)
+        // this.props.onTaskChange(this.state)
         // console.log(property)
         // console.log(value)
     }
@@ -33,11 +33,12 @@ export class Task extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         console.log(this.state)
-        this.setState({
-            id: this.state.id,
-            text: this.state.text,
-            isEditing: false,
-        })
+        this.props.onTaskChange(this.state)
+        // this.setState({
+        //     id: this.state.id,
+        //     text: this.state.text,
+        //     isEditing: false,
+        // })
     }
 
     render() {
@@ -54,7 +55,7 @@ export class Task extends React.Component {
                         onChange={this.handleChange}
                     />
                     <button className="button-edit" type="button" onClick={this.handleSubmit}>Submit</button>
-                    <button className="button-delete" type="button" onClick={this.props.deleteTask.bind(this)}>Delete Task</button>
+                    <button className="button-delete" type="button" onClick={this.props.deleteTask}>Delete Task</button>
                 </div>
             )
         } else {

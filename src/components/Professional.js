@@ -34,6 +34,13 @@ export class Professional extends React.Component {
         })
     }
 
+    deleteTask = (e) => {
+        const id = e.target.parentElement.id;
+        this.setState({
+            tasks: this.state.tasks.filter(task => task.id !== id)
+        });
+    };
+
     handleChange = (e) => {
         const property = e.target.id;
         const value = e.target.value;
@@ -44,9 +51,11 @@ export class Professional extends React.Component {
         })
     }
 
-    handleTaskChange = (text) => {
+    handleTaskChange = (task) => {
         this.setState({
-            task: text
+            id: task.id,
+            text: task.text,
+            isEditing: task.isEditing
         })
     }
 
@@ -74,7 +83,14 @@ export class Professional extends React.Component {
     render() {
         const { id, companyName, positionTitle, dateStarted, dateEnded, isEditing } = this.state;
         const { deleteExperience } = this.props;
-        const tasks = <Tasks tasks={this.state.tasks} onAddTask={this.addTask} isEditing={isEditing} onTaskChange={this.handleTaskChange}/>;
+        const tasks = 
+            <Tasks 
+                tasks={this.state.tasks} 
+                onAddTask={this.addTask}
+                onDeleteTask={this.deleteTask} 
+                isEditing={isEditing} 
+                onTaskChange={this.handleTaskChange}
+            />;
         if (isEditing) {
             return(
                 <form id={id} onSubmit={deleteExperience}>

@@ -38,13 +38,13 @@ export class Tasks extends React.Component {
     };
 
     render() {
-        const { tasks } = this.state;
+        const { tasks } = this.props;
         console.log(tasks)
         if (tasks.length > 0) {
             return (
                 <div>
                     <div>Your Tasks</div>
-                    <button className="button-add" onClick={this.props.addTask}>Add Task</button>
+                    <button className="button-add" onClick={this.props.onAddTask}>Add Task</button>
                     {tasks.map((task) => {
                         return (
                             <Task
@@ -53,7 +53,7 @@ export class Tasks extends React.Component {
                                 text={task.text}
                                 isEditing={task.isEditing}
                                 onTaskChange={this.props.onTaskChange}
-                                deleteTask={this.deleteTask}    
+                                deleteTask={this.props.onDeleteTask}    
                             />
                         )
                     })}
@@ -63,7 +63,7 @@ export class Tasks extends React.Component {
             return(
                 <div>
                     <div>No Tasks</div>
-                    <button className="button-add" onClick={this.addTask}>Add Task</button>
+                    <button className="button-add" onClick={this.props.onAddTask}>Add Task</button>
                 </div>
             )
         }
