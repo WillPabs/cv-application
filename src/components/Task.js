@@ -15,9 +15,11 @@ export class Task extends React.Component {
         const property = e.target.id;
         const value = e.target.value;
         this.setState({
-            [property]: value
+            id: this.props.id,
+            text: value,
+            isEditing: this.props.isEditing
         })
-
+        this.props.onTaskChange(e)
         // this.props.onTaskChange(this.state)
         // console.log(property)
         // console.log(value)
@@ -26,6 +28,8 @@ export class Task extends React.Component {
     editTask = (e) => {
         e.preventDefault();
         this.setState({
+            id: this.state.id,
+            text: this.state.text,
             isEditing: true
         })
     }
@@ -33,12 +37,12 @@ export class Task extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         console.log(this.state)
-        this.props.onTaskChange(this.state)
-        // this.setState({
-        //     id: this.state.id,
-        //     text: this.state.text,
-        //     isEditing: false,
-        // })
+        this.setState({
+            id: this.state.id,
+            text: this.state.text,
+            isEditing: false,
+        })
+        // this.props.onTaskSubmit(this.state)
     }
 
     render() {
@@ -48,8 +52,8 @@ export class Task extends React.Component {
                 <div id={`${id}`}>
                     <textarea 
                         id="text"
-                        rows="5" 
-                        cols="50"
+                        rows="2" 
+                        cols="20"
                         placeholder="Enter Task"
                         value={text}
                         onChange={this.handleChange}

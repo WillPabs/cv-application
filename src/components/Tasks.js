@@ -19,7 +19,7 @@ export class Tasks extends React.Component {
 
     addTask = (e) => {
         e.preventDefault();
-        console.log(e.target.elements)
+        this.props.onAddTask(this.state.task)
         this.setState({
             tasks: [...this.state.tasks, this.state.task],
             task: {
@@ -30,34 +30,78 @@ export class Tasks extends React.Component {
         })
     }
 
-    deleteTask = (e) => {
-        const id = e.target.parentElement.id;
+    handleTaskChange = (e) => {
+        const value = e.target.value;
         this.setState({
-            tasks: this.state.tasks.filter(task => task.id !== id)
-        });
-    };
+            task: {
+                id: this.state.id,
+                text: value,
+                isEditing: this.state.isEditing
+            }
+        })
+    }
+
+    // deleteTask = (e) => {
+    //     const id = e.target.parentElement.id;
+    //     this.setState({
+    //         tasks: this.state.tasks.filter(task => task.id !== id)
+    //     });
+    // };
 
     render() {
         const { tasks } = this.props;
+        const heading = tasks.length > 0 ? <div>Your Tasks</div> : <div>No Tasks</div>
         console.log(tasks)
+        return(
+            <ul>
+                {heading}
+                <button className="button-add" onClick={this.addTask}>Add Task</button>
+                {tasks.length > 0 ? tasks.map((task) => {
+                    return (
+                        <Task
+                            id={task.id} 
+                            key={task.id} 
+                            text={task.text}
+                            isEditing={task.isEditing}
+                            onTaskChange={this.handleTaskChange}
+                            onTaskSubmit={this.props.onTaskSubmit}
+                            deleteTask={this.props.onDeleteTask}    
+                        />
+                    )
+                }) : 
+                    <Task
+                        id={this.state.task.id} 
+                        key={this.state.task.id} 
+                        text={this.state.task.text}
+                        isEditing={this.props.task.isEditing}
+                        onTaskChange={this.handleTaskChange}
+                        onTaskSubmit={this.props.onTaskSubmit}
+                        deleteTask={this.props.onDeleteTask} 
+                    />
+                }
+            </ul>
+        )
+
+
+
         if (tasks.length > 0) {
             return (
-                <div>
+                <ul>
                     <div>Your Tasks</div>
                     <button className="button-add" onClick={this.props.onAddTask}>Add Task</button>
                     {tasks.map((task) => {
                         return (
                             <Task
-                                id={task.id} 
-                                key={task.id} 
-                                text={task.text}
-                                isEditing={task.isEditing}
-                                onTaskChange={this.props.onTaskChange}
-                                deleteTask={this.props.onDeleteTask}    
+                            id={task.id} 
+                            key={task.id} 
+                            text={task.text}
+                            isEditing={task.isEditing}
+                            onTaskSubmit={this.props.onTaskSubmit}
+                            deleteTask={this.props.onDeleteTask}    
                             />
                         )
                     })}
-                </div>
+                </ul>
             )
         } else {
             return(

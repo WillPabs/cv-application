@@ -22,10 +22,9 @@ export class Professional extends React.Component {
         }
     };
 
-    addTask = (e) => {
-        e.preventDefault();
+    addTask = (task) => {
         this.setState({
-            tasks: [...this.state.tasks, this.state.task],
+            tasks: [...this.state.tasks, task],
             task: {
                 id: uniqid(),
                 text: '',
@@ -44,18 +43,19 @@ export class Professional extends React.Component {
     handleChange = (e) => {
         const property = e.target.id;
         const value = e.target.value;
-        console.log(property)
-        console.log(value)
         this.setState({
             [property]: value
         })
     }
 
-    handleTaskChange = (task) => {
+    handleTaskSubmit = (task) => {
+        console.log(task)
         this.setState({
-            id: task.id,
-            text: task.text,
-            isEditing: task.isEditing
+            task: {
+                id: task.id,
+                text: task.text,
+                isEditing: task.isEditing
+            },
         })
     }
 
@@ -85,11 +85,12 @@ export class Professional extends React.Component {
         const { deleteExperience } = this.props;
         const tasks = 
             <Tasks 
-                tasks={this.state.tasks} 
+                tasks={this.state.tasks}
+                task={this.state.task} 
                 onAddTask={this.addTask}
                 onDeleteTask={this.deleteTask} 
                 isEditing={isEditing} 
-                onTaskChange={this.handleTaskChange}
+                onTaskSubmit={this.handleTaskSubmit}
             />;
         if (isEditing) {
             return(
