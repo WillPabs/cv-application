@@ -22,9 +22,9 @@ export class Professional extends React.Component {
         }
     };
 
-    addTask = (task) => {
+    addTask = () => {
         this.setState({
-            tasks: [...this.state.tasks, task],
+            tasks: [...this.state.tasks, this.state.task],
             task: {
                 id: uniqid(),
                 text: '',
@@ -48,13 +48,14 @@ export class Professional extends React.Component {
         })
     }
 
-    handleTaskSubmit = (task) => {
-        console.log(task)
+    handleTaskChange = (text) => {
+        console.log(text)
+        // console.log(this.state.tasks)
         this.setState({
             task: {
-                id: task.id,
-                text: task.text,
-                isEditing: task.isEditing
+                id: this.state.task.id,
+                text: this.state.task.text,
+                isEditing: this.state.task.isEditing
             },
         })
     }
@@ -68,7 +69,7 @@ export class Professional extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.handleEdit();
-        console.log(this.state)
+        console.log(this.state.tasks)
         this.setState({
             id: this.state.id,
             companyName: this.state.companyName,
@@ -90,6 +91,7 @@ export class Professional extends React.Component {
                 onAddTask={this.addTask}
                 onDeleteTask={this.deleteTask} 
                 isEditing={isEditing} 
+                onTaskChange={this.handleTaskChange}
                 onTaskSubmit={this.handleTaskSubmit}
             />;
         if (isEditing) {
