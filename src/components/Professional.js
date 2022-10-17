@@ -4,7 +4,8 @@ import uniqid from "uniqid";
 import { Task } from "./Task";
 
 export const Professional = (props) => {
-    const [id, setId] = useState(props.id);
+    const { id } = props;
+    
     const [companyName, setCompanyName] = useState(props.companyName);
     const [positionTitle, setPositionTitle] = useState(props.positionTitle);
     const [dateStarted, setDateStarted] = useState(props.dateStarted);

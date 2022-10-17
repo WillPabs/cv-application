@@ -2,9 +2,8 @@ import React from "react";
 import { useState } from "react";
 
 export const Task = (props) => {
-    const [id, setId] = useState(props.id);
     const [text, setText] = useState(props.text);
-    const [isEditing, setIsEditing] = useState(props.isEditing);
+    const { id, isEditing } = props;
 
     let { tasks } = props;
 
