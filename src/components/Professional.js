@@ -72,7 +72,8 @@ export class Professional extends React.Component {
         const tasksComponent = 
         <ul>
             {heading}
-            <button className="button-add" type="button" onClick={this.addTask}>Add Task</button>
+            {isEditing === true ? 
+                <button className="button-add" type="button" onClick={this.addTask}>Add Task</button> : null}
             {tasks.map((task) => {
                 return (
                     <Task
@@ -81,7 +82,6 @@ export class Professional extends React.Component {
                         text={task.text}
                         isEditing={this.state.isEditing}
                         tasks={tasks}
-                        setTasks={this.setTasks}
                         deleteTask={this.deleteTask}    
                     />
                 )
