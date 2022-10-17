@@ -38,8 +38,6 @@ export class ProfessionalSection extends React.Component {
     deleteExperience = (e) => {
         e.preventDefault();
         const id = e.target.id;
-        console.log(this.state.experiences)
-        console.log(id)
         this.setState({
             experiences: this.state.experiences.filter(experience => experience.id !== id)
         });
@@ -58,7 +56,7 @@ export class ProfessionalSection extends React.Component {
                 >
                     Add Experience
                 </button>
-                {experiences ? experiences.map((experience) => {
+                {experiences.map((experience) => {
                     return (
                         <Professional
                             key={experience.id} 
@@ -69,22 +67,10 @@ export class ProfessionalSection extends React.Component {
                             dateStarted={experience.dateStarted}
                             dateEnded={experience.dateEnded}
                             isEditing={experience.isEditing}
-                            onAddTask={this.addTask}
                             deleteExperience={this.deleteExperience}
                         />
                     )
-                }) : 
-                    <Professional 
-                        id={this.state.experience.id}
-                        companyName={this.state.experience.companyName}
-                        positionTitle={this.state.experience.positionTitle}
-                        tasks={this.state.experience.tasks}
-                        dateStarted={this.state.experience.dateStarted}
-                        dateEnded={this.state.experience.dateEnded}
-                        onAddTask={this.addTask}
-                        isEditing={this.state.experience.isEditing}
-                    /> 
-                }
+                })}
             </ul>
         )
     }
