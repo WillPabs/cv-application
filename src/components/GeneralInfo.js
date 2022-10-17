@@ -58,7 +58,7 @@ export const GeneralInfo = () => {
     } else {
         return(
             <div className="flex space-x-2 align-center">
-                <div>{name}</div>
+                <div id="name">{name}</div>
                 <div id="email">{email}</div>
                 <div id="phoneNo">{phoneNo}</div>
                 <button 
