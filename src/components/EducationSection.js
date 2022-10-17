@@ -1,82 +1,68 @@
 import React from "react";
+import { useState } from "react";
 import uniqid from "uniqid";
 import { Education } from "./Education";
 
-export class EducationSection extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            experiences: [],
-            experience: {
-                id: uniqid(),
-                schoolName: '',
-                major: '',
-                dateOfStudy: '',
-                isEditing: true
-            }
-        }
-    }
-
-    addExperience = () => {
-        this.setState({
-            experiences: [...this.state.experiences, this.state.experience],
-            experience: {
-                id: uniqid(),
-                schoolName: '',
-                major: '',
-                dateOfStudy: '',
-                isEditing: true
-            },
+export const EducationSection = () => {
+    const [experiences, setExperiences] = useState([]);
+    const [experience, setExperience] = useState(
+        {
+            id: uniqid(),
+            schoolName: '',
+            major: '',
+            dateOfStudy: '',
+            isEditing: true
         });
-    };
 
-    deleteExperience = (e) => {
+    const addExperience = () => {
+        setExperiences([...experiences, experience])
+        setExperience({
+            id: uniqid(),
+            schoolName: '',
+            major: '',
+            dateOfStudy: '',
+            isEditing: true
+        })
+    };
+    
+    const deleteExperience = (e) => {
         e.preventDefault();
         const id = e.target.id;
-        this.setState({
-            experiences: this.state.experiences.filter(experience => experience.id !== id)
-        });
+        setExperiences(experiences.filter(experience => experience.id !== id))
     };
 
-
-    render() {
-        const heading = <div className="section-heading">Educational Experience</div>;
-        const { id, schoolName, major, dateOfStudy, isEditing } = this.state.experience;
-        const { experiences } = this.state;
-        return (
-            <ul>
-                {heading}
-                <button 
-                    className="button-add"
-                    onClick={this.addExperience}
-                >
-                    Add Experience
-                </button>
-                {experiences ? experiences.map((experience) => {
-                    return (
-                        <Education
-                            key={experience.id}
-                            id={experience.id}
-                            schoolName={experience.schoolName}
-                            major={experience.major}
-                            dateOfStudy={experience.dateOfStudy}
-                            isEditing={experience.isEditing}
-                            deleteExperience={this.deleteExperience}
-                        />
-                    )
-                }) :
+    const heading = <div className="section-heading">Educational Experience</div>;
+    const { id, schoolName, major, dateOfStudy, isEditing } = experience;
+    return (
+        <ul>
+            {heading}
+            <button 
+                className="button-add"
+                onClick={addExperience}
+            >
+                Add Experience
+            </button>
+            {experiences ? experiences.map((experience) => {
+                return (
                     <Education
-                        id={id}
-                        schoolName={schoolName}
-                        major={major}
-                        dateOfStudy={dateOfStudy}
-                        isEditing={isEditing}
+                        key={experience.id}
+                        id={experience.id}
+                        schoolName={experience.schoolName}
+                        major={experience.major}
+                        dateOfStudy={experience.dateOfStudy}
+                        isEditing={experience.isEditing}
+                        deleteExperience={deleteExperience}
                     />
-                }
-            </ul>
-        )
-    }
-
-
+                )
+            }) :
+                <Education
+                    id={id}
+                    schoolName={schoolName}
+                    major={major}
+                    dateOfStudy={dateOfStudy}
+                    isEditing={isEditing}
+                />
+            }
+        </ul>
+    )
 }
