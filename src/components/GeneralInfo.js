@@ -2,9 +2,9 @@ import React from "react";
 import { useState } from "react";
 
 export const GeneralInfo = () => {
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [phoneNo, setPhoneNo] = useState('')
+    const [name, setName] = useState('Will Pabs')
+    const [email, setEmail] = useState('pabs@gmail.com')
+    const [phoneNo, setPhoneNo] = useState('718-232-3469')
     const [isEditing, setIsEditing] = useState(false)
 
     const handleChange = (e) => {
