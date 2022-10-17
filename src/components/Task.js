@@ -3,7 +3,6 @@ import React from "react";
 export class Task extends React.Component {
     constructor(props) {
         super(props)
-        this.onTaskChange = this.props.onTaskChange.bind(this);
 
         this.state = {
             id: this.props.id,
@@ -15,33 +14,12 @@ export class Task extends React.Component {
     handleChange = (e) => {
         const property = e.target.id;
         const value = e.target.value;
+        const id = this.props.id;
+        const taskIndex = this.props.tasks.findIndex(t => t.id === id);
+        this.props.tasks[taskIndex].text = value;
         this.setState({
             [property]: value,
         })
-        this.props.onTaskChange(value)
-        // this.props.onTaskChange(this.state)
-        console.log(this.state)
-        // console.log(value)
-    }
-
-    editTask = (e) => {
-        e.preventDefault();
-        this.setState({
-            id: this.state.id,
-            text: this.state.text,
-            isEditing: true
-        })
-    }
-
-    handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(this.state)
-        this.setState({
-            id: this.state.id,
-            text: this.state.text,
-            isEditing: false,
-        })
-        // this.props.onTaskSubmit(this.state)
     }
 
     render() {
@@ -57,7 +35,6 @@ export class Task extends React.Component {
                         value={text}
                         onChange={this.handleChange}
                     />
-                    {/* <button className="button-edit" type="button" onClick={this.handleSubmit}>Submit</button> */}
                     <button className="button-delete" type="button" onClick={this.props.deleteTask}>Delete Task</button>
                 </div>
             )
@@ -65,8 +42,7 @@ export class Task extends React.Component {
             return (
                 <li id={id}>
                     {text}
-                    {/* <button className="button-edit" type="button" onClick={this.editTask}>Edit</button> */}
-                    <button className="button-delete" type="submit" onClick={this.props.deleteTask}>Delete Task</button>
+                    {/* <button className="button-delete" type="submit" onClick={this.props.deleteTask}>Delete Task</button> */}
                 </li>
             )
         }

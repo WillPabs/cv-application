@@ -1,6 +1,6 @@
 import React from "react";
 import uniqid from "uniqid";
-import { Tasks } from "./Tasks";
+import { Task } from "./Task";
 
 export class Professional extends React.Component {
     constructor(props) {
@@ -17,7 +17,6 @@ export class Professional extends React.Component {
             task: {
                 id: uniqid(),
                 text: '',
-                isEditing: true
             }
         }
     };
@@ -28,7 +27,6 @@ export class Professional extends React.Component {
             task: {
                 id: uniqid(),
                 text: '',
-                isEditing: true
             }   
         })
     }
@@ -48,18 +46,6 @@ export class Professional extends React.Component {
         })
     }
 
-    handleTaskChange = (text) => {
-        console.log(text)
-        // console.log(this.state.tasks)
-        this.setState({
-            task: {
-                id: this.state.task.id,
-                text: this.state.task.text,
-                isEditing: this.state.task.isEditing
-            },
-        })
-    }
-
     handleEdit = () => {
         this.setState({
             isEditing: this.state.isEditing === true ? false : true
@@ -68,8 +54,6 @@ export class Professional extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.handleEdit();
-        console.log(this.state.tasks)
         this.setState({
             id: this.state.id,
             companyName: this.state.companyName,
@@ -82,18 +66,27 @@ export class Professional extends React.Component {
     }
 
     render() {
-        const { id, companyName, positionTitle, dateStarted, dateEnded, isEditing } = this.state;
+        const { id, companyName, positionTitle, dateStarted, dateEnded, isEditing, tasks } = this.state;
         const { deleteExperience } = this.props;
-        const tasks = 
-            <Tasks 
-                tasks={this.state.tasks}
-                task={this.state.task} 
-                onAddTask={this.addTask}
-                onDeleteTask={this.deleteTask} 
-                isEditing={isEditing} 
-                onTaskChange={this.handleTaskChange}
-                onTaskSubmit={this.handleTaskSubmit}
-            />;
+        const heading = tasks.length > 0 ? <div>Your Tasks</div> : <div>No Tasks</div>
+        const tasksComponent = 
+        <ul>
+            {heading}
+            <button className="button-add" type="button" onClick={this.addTask}>Add Task</button>
+            {tasks.map((task) => {
+                return (
+                    <Task
+                        id={task.id} 
+                        key={task.id} 
+                        text={task.text}
+                        isEditing={this.state.isEditing}
+                        tasks={tasks}
+                        setTasks={this.setTasks}
+                        deleteTask={this.deleteTask}    
+                    />
+                )
+            })}
+        </ul>
         if (isEditing) {
             return(
                 <form id={id} onSubmit={deleteExperience}>
@@ -125,7 +118,7 @@ export class Professional extends React.Component {
                         onChange={this.handleChange}
                         value={dateEnded}
                     />
-                    {tasks}
+                    {tasksComponent}
                     <button className="button-edit" type="button" onClick={this.handleSubmit}>Submit</button>
                     <button className="button-delete" type="submit">Delete Experience</button>
                 </form>
@@ -137,7 +130,7 @@ export class Professional extends React.Component {
                     <div>{positionTitle}</div>
                     <div>{dateStarted}</div>
                     <div>{dateEnded}</div>
-                    {tasks}
+                    {tasksComponent}
                     <button className="button-edit" onClick={this.handleEdit}>Edit</button>
                 </div>
             );
