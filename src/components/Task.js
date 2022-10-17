@@ -1,50 +1,39 @@
 import React from "react";
+import { useState } from "react";
 
-export class Task extends React.Component {
-    constructor(props) {
-        super(props)
+export const Task = (props) => {
+    const [id, setId] = useState(props.id);
+    const [text, setText] = useState(props.text);
+    const [isEditing, setIsEditing] = useState(props.isEditing);
 
-        this.state = {
-            id: this.props.id,
-            text: this.props.text,
-            isEditing: this.props.isEditing
-        }
-    }
+    let { tasks } = props;
 
-    handleChange = (e) => {
-        const property = e.target.id;
+    const handleChange = (e) => {
         const value = e.target.value;
-        const id = this.props.id;
-        const taskIndex = this.props.tasks.findIndex(t => t.id === id);
-        this.props.tasks[taskIndex].text = value;
-        this.setState({
-            [property]: value,
-        })
+        let taskIndex = tasks.findIndex(t => t.id === id);
+        tasks[taskIndex].text = value;
+        setText(value)
     }
 
-    render() {
-        const { id, text, isEditing } = this.state
-        if (isEditing) {
-            return (
-                <div id={`${id}`}>
-                    <textarea 
-                        id="text"
-                        rows="2" 
-                        cols="20"
-                        placeholder="Enter Task"
-                        value={text}
-                        onChange={this.handleChange}
-                    />
-                    <button className="button-delete" type="button" onClick={this.props.deleteTask}>Delete Task</button>
-                </div>
-            )
-        } else {
-            return (
-                <li id={id}>
-                    {text}
-                    {/* <button className="button-delete" type="submit" onClick={this.props.deleteTask}>Delete Task</button> */}
-                </li>
-            )
-        }
+    if (isEditing) {
+        return (
+            <div id={`${id}`}>
+                <textarea 
+                    id="text"
+                    rows="2" 
+                    cols="20"
+                    placeholder="Enter Task"
+                    value={text}
+                    onChange={handleChange}
+                />
+                <button className="button-delete" type="button" onClick={props.deleteTask}>Delete Task</button>
+            </div>
+        )
+    } else {
+        return (
+            <li id={id}>
+                {text}
+            </li>
+        )
     }
 }
