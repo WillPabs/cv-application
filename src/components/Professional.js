@@ -106,7 +106,7 @@ export const Professional = (props) => {
         );
     } else {
         return(
-            <div id={id}>
+            <div id={id} className="flex gap-2">
                 <div>{companyName}</div>
                 <div>{positionTitle}</div>
                 <div>{dateStarted}</div>
